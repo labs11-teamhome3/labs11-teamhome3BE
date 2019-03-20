@@ -26,7 +26,7 @@ const context = async ({ req }) => {
 		});
 	const options = {
 		aud: `https://labs-manaje.herokuapp.com/`,
-		iss: `${AUTH0_DOMAIN}`,
+		iss: `${AUTH0_DOMAIN}/`,
 		algorithms: ['RS256']
 	};
 	try {
