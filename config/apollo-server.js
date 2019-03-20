@@ -10,14 +10,14 @@ const { AUTH0_DOMAIN } = process.env;
 
 const schema = makeExecutableSchema({
 	typeDefs,
-	resolvers,
+	resolvers
 });
 // testing my push/pull request and branch auth. sorry for the frivolous pull request.
 const context = async ({ req }) => {
 	let currentUser;
 	const token = req.headers.authorization;
 	const client = jwksClient({
-		jwksUri: `${AUTH0_DOMAIN}/.well-known/jwks.json`,
+		jwksUri: `${AUTH0_DOMAIN}/.well-known/jwks.json`
 	});
 	const getKey = (header, cb) =>
 		client.getSigningKey(header.kid, (err, key) => {
@@ -25,7 +25,7 @@ const context = async ({ req }) => {
 			cb(null, signingKey);
 		});
 	const options = {
-		aud: `https://labs-manaje.herokuapp.com/`,
+		aud: `https://labs-manaje.herokuapp.com`,
 		iss: `${AUTH0_DOMAIN}/`,
 		algorithms: ['RS256']
 	};
@@ -41,10 +41,10 @@ const context = async ({ req }) => {
 						existingUser =>
 							existingUser
 								? resolve(existingUser) // adds user to Apollo context, giving all resolvers access to the user
-								: resolve(decoded), // adds the decoded token to the Apollo context
+								: resolve(decoded) // adds the decoded token to the Apollo context
 					)
 				);
-			}),
+			})
 		);
 	} catch (e) {
 		throw new AuthenticationError(`${e}`);
@@ -59,7 +59,7 @@ const server = new ApolloServer({
 	// debug: true,
 	playground: true,
 	// tracing: true,
-	introspection: true,
+	introspection: true
 });
 
 module.exports = app => server.applyMiddleware({ app });
