@@ -25,9 +25,9 @@ const context = async ({ req }) => {
 			cb(null, signingKey);
 		});
 	const options = {
-		aud: `https://labs-manaje.herokuapp.com`,
-		iss: `${AUTH0_DOMAIN}/api/v2`,
-		algorithms: [ 'RS256' ],
+		aud: `https://labs-manaje.herokuapp.com/`,
+		iss: `${AUTH0_DOMAIN}`,
+		algorithms: ['RS256']
 	};
 	try {
 		currentUser = await new Promise((resolve, reject) =>
